@@ -13,6 +13,7 @@ contract Fitswap{
         uint postal_code;
         uint avg_rating;
         string skills;
+        uint active;
     }
     
     enum UserType {NINJA, NOVICE}
