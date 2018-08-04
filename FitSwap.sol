@@ -17,6 +17,7 @@ contract Fitswap{
     
     enum UserType {NINJA, NOVICE}
     
+    mapping(address => User) total_users_list;
     mapping(address => User[]) customer_list;
     mapping(address => uint) customer_ratings_list;
 }
