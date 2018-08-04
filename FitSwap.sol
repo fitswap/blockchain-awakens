@@ -5,7 +5,6 @@ contract Fitswap{
     struct User{
         string email;
         string password;
-        string password;
         string f_name;
         string l_name;
         address user_address;
@@ -16,8 +15,8 @@ contract Fitswap{
         string skills;
     }
     
-    enum UserType {NINJA, NOVICE};
+    enum UserType {NINJA, NOVICE}
     
     mapping(address => User[]) customer_list;
-    mapping(User => uint) customer_ratings_list;
+    mapping(address => uint) customer_ratings_list;
 }
