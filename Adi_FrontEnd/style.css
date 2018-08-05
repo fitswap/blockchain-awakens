@@ -1,0 +1,33 @@
+body{
+    background-color: #00AD77;
+    color:white;
+    text-shadow: -1px 0 black;
+    font-family: Source Sans Pro,serif, sans-serif;
+}
+
+*
+{
+text-align: center !important;
+margin: auto !important;
+}
+
+header{
+    background-color: #fff;
+    height: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 1026px) {
+    .floatright{
+        display: none;
+    }
+}
+
+/*logo dimensions*/
+.logo{
+    height:100%;
+    width:auto;
+    float: left;
+    padding-left: 100px;   
+}
