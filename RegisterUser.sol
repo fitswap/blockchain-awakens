@@ -14,7 +14,8 @@ contract RegisterUser is Fitswap {
             return "Already exists";
         }
         total_users_list[msg.sender] = User(email, password, 
-        fname, lname, msg.sender, UserType.NOVICE, 0, postal_code, 0,skills,1);
+        fname, lname, msg.sender, UserType.NOVICE, 1);
+        extra_info_list[msg.sender] = ExtraInfo(msg.sender,skills,0,postal_code,0);
         return "Done";
     }
     
@@ -28,7 +29,8 @@ contract RegisterUser is Fitswap {
             return "Already exists";
         }
         total_users_list[msg.sender] = User(email, password, 
-        fname, lname, msg.sender, UserType.NINJA, 0, postal_code, 0,skills,1);
+        fname, lname, msg.sender, UserType.NINJA, 1);
+        extra_info_list[msg.sender] = ExtraInfo(msg.sender,skills,0,postal_code,0);
         return "Done";
     }
     
@@ -36,7 +38,7 @@ contract RegisterUser is Fitswap {
         delete total_users_list[user_address];
     }
     function getNinja(address query) public view returns (string, 
-    string, string, uint, string) {
+    string, string) {
         if (total_users_list[query].active != 1) {
             return;
         }
@@ -45,13 +47,11 @@ contract RegisterUser is Fitswap {
         }
         return (total_users_list[query].f_name, 
         total_users_list[query].l_name, 
-        total_users_list[query].email, 
-        total_users_list[query].postal_code, 
-        total_users_list[query].skills);
+        total_users_list[query].email);
     }
     
     function getNovice(address query) public view returns (string, 
-    string, string, uint, string) {
+    string, string) {
         if (total_users_list[query].active != 1) {
             return;
         }
@@ -60,16 +60,14 @@ contract RegisterUser is Fitswap {
         }
         return (total_users_list[query].f_name, 
         total_users_list[query].l_name, 
-        total_users_list[query].email, 
-        total_users_list[query].postal_code, 
-        total_users_list[query].skills);
+        total_users_list[query].email);
     }
     
     function getRating(address query) public view returns(uint) {
         if (total_users_list[query].active != 1) {
             return;
         }
-        return total_users_list[query].avg_rating;  
+        return extra_info_list[query].avg_rating;  
     }
     
     function isValidNovice(address query, string password) public view returns(bool) {
