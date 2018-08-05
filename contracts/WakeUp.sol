@@ -43,13 +43,13 @@ contract WakeUp is Ownable{
         
         if (now <= alarm) 
         {
-            //if(now >= (alarm - 600))
-            //{
+            if(now >= (alarm - 600))
+            {
                 if ( uint(keccak256(password)) == uint(keccak256(_pass)))
                 {
                     msg.sender.transfer(address(this).balance);    
                 }
-            //}
+            }
         }
     }
     
