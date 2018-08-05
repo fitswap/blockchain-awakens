@@ -12,13 +12,13 @@ contract WakeUp is Ownable{
     uint current_time;
     uint alarm;
     
-    constructor() public payable{
+    constructor() public{
         
         current_time = now;
         owner = msg.sender;
     }
     
-    function setAlarm(uint _alarm) public onlyOwner{
+    function setAlarm(uint _alarm) public onlyOwner payable{
     
         _alarm = _alarm * 60 * 60;
         alarm = now + _alarm;

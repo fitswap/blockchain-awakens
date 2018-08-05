@@ -112,13 +112,9 @@ App = {
       },
 
 
-     completeService:function(){
+     
 
-     },
-
-     getServices:function(){
-
-     },
+     
            getUserByAddress:function(add, callback){
                        App.contracts.Insurance.deployed().then(function (instance) {
                              return instance.get_user_by_address(add, {
@@ -133,52 +129,97 @@ App = {
                  },
 
                 
+            createWakeUp: function(){
+                  var alarm = $('#hours').val();
+                  App.contracts.WakeUp.deployed().then(function(app){
+                        return app.setAlarm(hours, {
+                              from: App.owner,
+                              value: 10,
+                              gas: 500000  
+                        });
+                  }).then(function (result) {
+                        console.log(result)
+                  }).catch(function (err) {
+                        console.error(err);
+                  });
+                 },
 
+            enterPassword: function(){
+                  App.contracts.WakeUp.deployed().then(function(app){
+                        return app.setPassword(pass, {
+                              from: App.owner,
+                              gas: 500000  
+                        });
+                  }).then(function (result) {
+                        console.log(result)
+                  }).catch(function (err) {
+                        console.error(err);
+                  });
+                 },
+
+            wakeUp: function(){
+                  App.contracts.WakeUp.deployed().then(function(app){
+                        return app.enterPassword(pass, {
+                              from: App.owner,
+                              gas: 500000  
+                        });
+                  }).then(function (result) {
+                        console.log(result)
+                  }).catch(function (err) {
+                        console.error(err);
+                  });
+                 },
 
 
 
 
 
       initContract: function () {
-            
+            initFitSwap();
       },
 
       initFitSwap:function(){
-            $.getJSON('../Insurance.json', function (InsuranceArtifact) {
-                  // get the contract artifact file and use it to instantiate a truffle contract abstraction
-                  App.contracts.Insurance = TruffleContract(InsuranceArtifact);
-                  // set the provider for our contracts
-                  App.contracts.Insurance.setProvider(App.web3Provider);
-                  // retrieve the article from the contract
-                  //     return App.reloadArticles();
+            $.getJSON('../UserEscrow.json', function (escrow) {
+                  App.contracts.UserEscrow = TruffleContract(escrow);
+                  App.contracts.UserEscrow.setProvider(App.web3Provider);
             });
+            $.getJSON('../Customer.json', function (customer) {
+                  App.contracts.Customer = TruffleContract(customer);
+                  App.contracts.Customer.setProvider(App.web3Provider);
+            });
+            $.getJSON('../WeightPool.json', function (weight) {
+                  App.contracts.WeightPool = TruffleContract(weight);
+                  App.contracts.WeightPool.setProvider(App.web3Provider);
+            });
+            $.getJSON('../WakeUp.json', function (wakeup) {
+                  App.contracts.WakeUp = TruffleContract(wakeup);
+                  App.contracts.WakeUp.setProvider(App.web3Provider);
+            });
+            $.getJSON('../FitSwap.json', function (fitswap) {
+                  App.contracts.FitSwap = TruffleContract(fitswap);
+                  App.contracts.FitSwap.setProvider(App.web3Provider);
+            });
+            
       },
 
-      initCustomer:function(){
-            $.getJSON('../Insurance.json', function (InsuranceArtifact) {
-                  // get the contract artifact file and use it to instantiate a truffle contract abstraction
-                  App.contracts.Insurance = TruffleContract(InsuranceArtifact);
-                  // set the provider for our contracts
-                  App.contracts.Insurance.setProvider(App.web3Provider);
-                  // retrieve the article from the contract
-                  //     return App.reloadArticles();
-            });
-      },
 
-      initUserEscrow:function(){
-            $.getJSON('../Insurance.json', function (InsuranceArtifact) {
-                  // get the contract artifact file and use it to instantiate a truffle contract abstraction
-                  App.contracts.Insurance = TruffleContract(InsuranceArtifact);
-                  // set the provider for our contracts
-                  App.contracts.Insurance.setProvider(App.web3Provider);
-                  // retrieve the article from the contract
-                  //     return App.reloadArticles();
-            });
+            
+      getFitSwap: function () {
+            return App.contracts.FitSwap;
       },
-
-      getInstance: function () {
+      getCustomer: function () {
+            return App.contracts.Customer;
+      },
+      getUserEscrow: function () {
             return App.contracts.Insurance;
+      },
+      getWakeUp: function () {
+            return App.contracts.WakeUp;
+      },
+      getWeightPool: function () {
+            return App.contracts.WeightPool;
       }
+
 
 };
 

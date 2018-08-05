@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <title>FitSwap | Swap to Fitness</title>
 <link rel="stylesheet" href="style.css">
+
 </head>
-<body>
+<body onload="loadScript()">
     
     <div style="padding-top:100px;font-size:1.9em;">
     <h1 style="padding-bottom: 60px;">Welcome to Wake Up Commitment</h1>
@@ -17,7 +18,7 @@
         <br><br>
         Input the Number of Hours you want to sleep:
         <br>
-        <input type="text" name="lastname">
+        <input type="text" name="hours">
         <br><br>
         Set a Password:
         <br>
@@ -27,5 +28,22 @@
     </form>
     </div>
     
+    <script src="../js/web3.min.js"></script>
+  <script>
+    function loadScript() {
+      if (typeof web3 !== 'undefined') {
+            //reuse the provider of the Web3 object injected by Metamask
+            App.web3Provider = web3.currentProvider;
+      } else {
+            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+              App.init();
+      }
+      setTimeout(function () {
+        checkUser();
+      }, 100);
+      // function getPolicyDetails()
+    // }
+    }
+  </script>
 </body>
 </html>
