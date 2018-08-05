@@ -1,7 +1,6 @@
 pragma solidity ^0.4.0;
 
 import "./FitSwap.sol";
-import "./RegisterUser.sol";
 import "./Challenge.sol";
 
 contract WeightLossChallenge is Challenge {
