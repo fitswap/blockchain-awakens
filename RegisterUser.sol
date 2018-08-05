@@ -71,4 +71,16 @@ contract RegisterUser is Fitswap {
         }
         return total_users_list[query].avg_rating;  
     }
+    
+    function isValidNovice(address query, string password) public view returns(bool) {
+        return (total_users_list[query].active == 1 &&
+        total_users_list[query].user_type == UserType.NOVICE &&
+        keccak256(total_users_list[query].password) == keccak256(password));
+    }
+    
+    function isValidNinja(address query, string password) public view returns(bool) {
+        return (total_users_list[query].active == 1 &&
+        total_users_list[query].user_type == UserType.NINJA &&
+        keccak256(total_users_list[query].password) == keccak256(password));
+    }
 }
