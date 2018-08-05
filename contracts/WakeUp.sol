@@ -1,7 +1,7 @@
 pragma solidity ^0.4.0;
 
-import "./ownable.sol";
-import "./safemath.sol";
+import "./Ownable.sol";
+import "./SafeMath.sol";
 
 contract WakeUp is Ownable{
     
